@@ -10,7 +10,7 @@
   "author": "Sebas",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^9.2.0",
+    "eslint": "^7.32.0",
     "qunit": "^2.20.1",
     "http-server": "^14.1.1"
   }
