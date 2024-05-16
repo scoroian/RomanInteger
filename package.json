@@ -1,17 +1,10 @@
 {
-  "name": "roman-converter",
-  "version": "1.0.0",
-  "description": "Roman numeral converter",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint .",
-    "test": "http-server -c-1 -p 8080 & sleep 3 && qunit http://localhost:8080/index.html && pkill http-server"
-  },
-  "author": "Sebas",
-  "license": "MIT",
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "qunit": "^2.20.1",
-    "http-server": "^14.1.1"
+      "eslint": "^9.2.0",
+      "qunit": "^2.20.1"
+  },
+  "scripts": {
+      "lint": "eslint .",
+      "test": "npm test"
   }
 }
