@@ -4,14 +4,12 @@ const INVALID_INTEGER = 'Please enter a valid integer';
 const OUT_OF_RANGE = 'Out of range (1-3999)';
 
 function init() { 
-  
   // Load elements once to avoid repetition on every invocation
-  var modeCheckbox = document.querySelector('input[type=\'checkbox\']');
+  var modeCheckbox = document.querySelector('input[type="checkbox"]');
   var header = document.querySelector('h1');
   var convertButton = document.querySelector('.convert-button');
   var outputArea = document.querySelector('.convert-output');
-  var inputArea = document.querySelector('input[type=\'text\']');
-
+  var inputArea = document.querySelector('input[type="text"]');
 
   modeCheckbox.addEventListener('change', function(e) {
     header.innerHTML = getModeTitle(e.target.checked);
@@ -21,37 +19,25 @@ function init() {
     return integerToRoman ? 'Integer To Roman' : 'Roman To Integer';
   };
 
-  // Now, the convertion operation does only perform the operation. 
-  // Things we have extracted to this listener: 
-  // 1 - Read the UI inputs (inputArea.value)
-  // 2 - Write the UI output (outputArea.innerHTML)
-  // 3 - Show error messages
-  // This is cleaner and also removes code duplications
   convertButton.addEventListener('click', function() {
     var inputValue = inputArea.value;
-    var convertion = modeCheckbox.checked ? convertIntegerToRoman(inputValue) : convertRomanToInteger(inputValue);
-    if (convertion.result) {
-      outputArea.innerHTML = convertion.value;
+    var conversion = modeCheckbox.checked ? convertIntegerToRoman(inputValue) : convertRomanToInteger(inputValue);
+    if (conversion.result) {
+      outputArea.innerHTML = conversion.value;
     } else {
-      alert(convertion.message);
+      alert(conversion.message);
     }
     
+    // Seguimiento del evento en GA
     gtag('event', 'conversion', {
       'event_category': 'Conversion',
       'event_label': modeCheckbox.checked ? 'Integer to Roman' : 'Roman to Integer',
       'value': conversion.value
     });
   });
-
 }
 
-// Now the convertion methods receive both an input argument instead
-// of reading directly from the UI.
-// On top of that, they return a JSON object instead of updating the
-// UI directly. The JSON object contains the result (ok/nok), the value
-// and an error message if needed
 const convertRomanToInteger = function(roman) {
-
   var response = {
     value: 0, 
     message: '',
@@ -63,7 +49,7 @@ const convertRomanToInteger = function(roman) {
     /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
   );
 
-  // Convert the string to uppercase so we just to handle uppercase strings
+  // Convert the string to uppercase so we just handle uppercase strings
   roman = roman.toUpperCase();
   const regexResult = romanNumeralRegex.test(roman);
 
@@ -86,7 +72,6 @@ const convertRomanToInteger = function(roman) {
   };
 
   var sum = 0;
-
   var prevIndex = 0;
 
   for (var i = roman.length - 1; i >= 0; i--) {
@@ -105,13 +90,7 @@ const convertRomanToInteger = function(roman) {
   return response;
 };
 
-// Now the convertion methods receive both an input argument instead
-// of reading directly from the UI.
-// On top of that, they return a JSON object instead of updating the
-// UI directly. The JSON object contains the result (ok/nok), the value
-// and an error message if needed
 const convertIntegerToRoman = function(num) {
-
   var response = {
     value: 0,
     message: '', 
@@ -248,9 +227,6 @@ if (!String.prototype.repeat) {
     if (str.length == 0 || count == 0) {
       return '';
     }
-    // Ensuring count is a 31-bit integer allows us to heavily optimize the
-    // main part. But anyway, most current (August 2014) browsers can't handle
-    // strings 1 << 28 chars or longer, so:
     if (str.length * count >= 1 << 28) {
       throw new RangeError('repeat count must not overflow maximum string size');
     }
@@ -265,8 +241,6 @@ if (!String.prototype.repeat) {
       }
       str += str;
     }
-    // Could we try:
-    // return Array(count + 1).join(this);
     return rpt;
   };
 }
