@@ -7,7 +7,10 @@ module.exports = {
   'extends': 'eslint:recommended',
   'parserOptions': {
     'sourceType': 'module'
-  },
+  },,
+  'globals': {
+    'gtag': 'readonly'
+  }
   'rules': {
     'no-cond-assign': [
       'error',
